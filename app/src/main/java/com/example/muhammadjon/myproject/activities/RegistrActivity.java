@@ -11,6 +11,7 @@ import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.example.muhammadjon.myproject.App;
 import com.example.muhammadjon.myproject.R;
@@ -86,6 +87,7 @@ public class RegistrActivity extends AppCompatActivity implements View.OnClickLi
                             Log.d("MainActivity", "Succes" + signUpResponse.getUserId());
                             Intent intent = new Intent(RegistrActivity.this,
                                     PingcodeActivity.class);
+                            Toast.makeText(RegistrActivity.this, "userId : "+signUpResponse.getUserId(), Toast.LENGTH_SHORT).show();
                             preferences.edit().putInt("iss",signUpResponse.getUserId()).apply();
                             preferences.edit().putBoolean("is_first", false).apply();
                             intent.putExtra("key", passwort);
@@ -95,7 +97,7 @@ public class RegistrActivity extends AppCompatActivity implements View.OnClickLi
 
                         @Override
                         public void onError(Throwable e) {
-
+                           Log.d("RegisterActivity","onError"+e.getMessage());
                         }
                     });
 

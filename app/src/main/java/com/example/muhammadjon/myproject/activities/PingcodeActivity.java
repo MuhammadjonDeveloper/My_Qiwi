@@ -103,7 +103,12 @@ public class PingcodeActivity extends AppCompatActivity {
                 startActivity(new Intent(PingcodeActivity.this, MainActivity.class));
                 finish();
             } else {
-                setPinCode("");
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        setPinCode("");
+                    }
+                },1000);
                 counter++;
             }
         } else {

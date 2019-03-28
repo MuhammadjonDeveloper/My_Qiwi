@@ -25,6 +25,8 @@
         <activity android:name=".activities.PingcodeActivity" />
 
         <activity android:name=".activities.MainActivity" />
+        <activity android:name=".activities.CategoryActivity"/>
+        <activity android:name=".activities.WindowActivity"/>
     </application>
 
 </manifest>
