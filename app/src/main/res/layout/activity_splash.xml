@@ -6,7 +6,7 @@
     android:background="@color/colorWhile"
     android:orientation="vertical"
     android:weightSum="3"
-    tools:context=".activities.SplashActivity">
+    tools:context=".activities.PingcodeActivity">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -34,7 +34,7 @@
                     android:layout_gravity="center"
                     android:layout_margin="8dp"
                     android:text="PIN-KOD"
-                    android:textColor="@color/text_color_black"
+                    android:textColor="@color/colorWhile"
                     android:textSize="25sp" />
 
                 <TextView

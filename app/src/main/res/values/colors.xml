@@ -5,10 +5,10 @@
     <color name="colorAccent">#D81B60</color>
     <color name="colorWhile">#ffffff</color>
     <color name="colorBlueDark">#011a78</color>
-    <color name="colorBlueT">#005CCC</color>
+    <color name="colorBlueT">#026594</color>
     <color name="colorBlue">#1abcf7</color>
 
-    <color name="colorGray">#acafb2</color>
+
     <color name="colorDarkGray">#878889</color>
     <color name="colorTextDarkGray">#616161</color>
     <color name="colorGrayLight">#f5f5f5</color>
@@ -21,7 +21,6 @@
     <color name="fingerprint_error_color">#F4511E</color>
     <color name="colorGreen">#4caf50</color>
     <color name="colorGreenSalad">#25d000</color>
-
     <color name="text_color_gray">#424242</color>
     <color name="text_color_black">#212121</color>
     <color name="pin_text_color">#212121</color>

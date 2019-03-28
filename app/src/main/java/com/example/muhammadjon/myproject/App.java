@@ -5,33 +5,31 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
-import com.example.muhammadjon.myproject.activities.RegistrActivity;
-import com.example.muhammadjon.myproject.activities.SplashActivity;
+import com.example.muhammadjon.myproject.activities.MainActivity;
 import com.example.muhammadjon.myproject.network.ApiService;
-import com.example.muhammadjon.myproject.network.NetworkManager;
+import com.example.muhammadjon.myproject.network.NetworkManagerImpl;
 
 public class App extends Application {
     private ApiService apiService;
     private SharedPreferences preferences;
-
+//<!--style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"-->
     @Override
     public void onCreate() {
         super.onCreate();
 
         preferences = PreferenceManager.getDefaultSharedPreferences(this);
-
-
-        NetworkManager manager = new NetworkManager(this);
+        NetworkManagerImpl manager = new NetworkManagerImpl(this);
         apiService = manager.getApiservice();
 
-        boolean isFirst = preferences.getBoolean("is_first", true);
-        if (isFirst) {
-            startActivity(new Intent(this, RegistrActivity.class));
-        } else {
-            startActivity(new Intent(this, SplashActivity.class));
-        }
-    }
+        startActivity(new Intent(this, MainActivity.class));
 
+//        boolean isFirst = preferences.getBoolean("is_first", true);
+//        if (isFirst) {
+//            startActivity(new Intent(this, RegistrActivity.class));
+//        } else {
+//            startActivity(new Intent(this, LoginActivity.class));
+//        }
+    }
     public ApiService getApiService() {
         return apiService;
     }

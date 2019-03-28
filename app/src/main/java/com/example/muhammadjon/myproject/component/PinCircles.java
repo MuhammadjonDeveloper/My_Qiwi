@@ -72,6 +72,7 @@ public class PinCircles extends FrameLayout {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+
     public void fillCircles(int fillCount) {
         for (int i = 0; i < count; i++) {
             if (i < fillCount) circles.get(i).setBackground(fillBachground);
