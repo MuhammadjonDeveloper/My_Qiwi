@@ -1,9 +1,14 @@
 package com.example.muhammadjon.myproject.dbase;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class Values {
+
+
+    @PrimaryKey(autoGenerate = true)
+    private long id_values;
     private long id;
     private long field_id;
     private String field_value;
@@ -15,6 +20,14 @@ public class Values {
     private long parent_id;
     private long check_id;
     private long display_order;
+
+    public long getId_values() {
+        return id_values;
+    }
+
+    public void setId_values(long id_values) {
+        this.id_values = id_values;
+    }
 
     public long getId() {
         return id;

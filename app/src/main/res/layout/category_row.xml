@@ -13,14 +13,14 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.AppCompatAutoCompleteTextView
+        <android.support.v7.widget.AppCompatTextView
             android:layout_width="wrap_content"
             android:id="@+id/disply_id"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:textSize="22sp"
             android:text="1"/>
-        <android.support.v7.widget.AppCompatAutoCompleteTextView
+        <android.support.v7.widget.AppCompatTextView
             android:id="@+id/category_title"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

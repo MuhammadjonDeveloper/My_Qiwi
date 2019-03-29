@@ -1,9 +1,11 @@
 package com.example.muhammadjon.myproject.dbase;
 
 import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 @Entity
 public class Merchants {
+    @PrimaryKey()
     private long id;
     private long category_id;
     private String name_ru;

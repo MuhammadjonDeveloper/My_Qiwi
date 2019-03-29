@@ -2,7 +2,6 @@ package com.example.muhammadjon.myproject.dbase;
 
 import android.arch.persistence.room.ColumnInfo;
 import android.arch.persistence.room.Entity;
-import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
 
 @Entity
@@ -16,7 +15,7 @@ public class Categories {
     private String name_uz;
     @ColumnInfo(name = "name_en")
     private String name_en;
-    @Ignore
+
     private long display_order;
 
     public long getId() {

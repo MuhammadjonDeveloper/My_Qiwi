@@ -1,5 +1,6 @@
 package com.example.muhammadjon.myproject.activities;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
@@ -10,14 +11,16 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.example.muhammadjon.myproject.R;
-import com.example.muhammadjon.myproject.dbase.Event;
+import com.example.muhammadjon.myproject.dbase.AppDataBase;
+import com.example.muhammadjon.myproject.dbase.CategoriesDao;
+import com.example.muhammadjon.myproject.dbase.FieldsDao;
+import com.example.muhammadjon.myproject.dbase.MerchantsDao;
+import com.example.muhammadjon.myproject.dbase.MyPojo;
+import com.example.muhammadjon.myproject.dbase.ValuesDao;
 import com.example.muhammadjon.myproject.network.ApiService;
 import com.example.muhammadjon.myproject.network.NetworkModul;
-
-import java.util.ArrayList;
 
 import io.reactivex.Single;
 import io.reactivex.SingleObserver;
@@ -30,7 +33,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ApiService service;
     private LinearLayout btn_paynet;
     private ProgressBar paynetuzpb;
+    private CategoriesDao categoriesDao;
+    private MerchantsDao merchantsDao;
+    private FieldsDao fieldsDao;
+    private ValuesDao valuesDao;
     private CompositeDisposable cd = new CompositeDisposable();
+    private static final String TAG = "MainActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +57,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         paynetuzpb.setVisibility(View.INVISIBLE);
         NetworkModul networkModul = new NetworkModul(this);
         service = networkModul.getApiservice();
+        categoriesDao= AppDataBase.getInstaince(this).getCategoryDao();
+        fieldsDao= AppDataBase.getInstaince(this).getFielsDao();
+        merchantsDao= AppDataBase.getInstaince(this).getMerchantDao();
+        valuesDao=AppDataBase.getInstaince(this).getValuesDao();
     }
 
     @Override
@@ -62,29 +74,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     public void onClick(View view) {
         paynetuzpb.setVisibility(View.VISIBLE);
-        Single<Event> single = service.event();
+        Single<MyPojo> single = service.event();
         single.subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new SingleObserver<Event>() {
+                .subscribe(new SingleObserver<MyPojo>() {
                     @Override
                     public void onSubscribe(Disposable d) {
                         cd.add(d);
                     }
 
                     @Override
-                    public void onSuccess(Event event) {
-                        ArrayList<String> list = new ArrayList<>();
-                        for (int i = 0; i < event.getCateories()[0].getName_uz().length(); i++) {
-                            list.add(event.getCateories()[0].getName_uz());
-                            Log.d("MainActivity_in", "Category: " + list.get(i));
-                        }
-                        Toast.makeText(MainActivity.this, "ishladi: " + event.getCateories()[0].getName_ru(), Toast.LENGTH_SHORT).show();
-                        paynetuzpb.setVisibility(View.INVISIBLE);
+                    public void onSuccess(MyPojo event) {
+                        categoriesDao.insert(event.getCategories());
+                        merchantsDao.insert(event.getMerchants());
+                        valuesDao.insert(event.getValues());
+                        fieldsDao.insert(event.getFields());
+                        paynetuzpb.setVisibility(View.GONE);
+                        Intent intent = new Intent(MainActivity.this, CategoryActivity.class);
+                        startActivity(intent);
                     }
 
                     @Override
                     public void onError(Throwable e) {
-                        Toast.makeText(MainActivity.this, "onError"+e.getMessage(), Toast.LENGTH_SHORT).show();
+                        paynetuzpb.setVisibility(View.INVISIBLE);
+                        Log.e(TAG, "onError: " + e.getMessage());
                     }
                 });
     }
